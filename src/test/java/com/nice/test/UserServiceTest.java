@@ -1,14 +1,16 @@
 package com.nice.test;
 
-import com.nice.domain.User;
-import com.nice.repository.UserRepository;
-import com.nice.services.impl.UserServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+
+import com.nice.Exceptions.NotFoundException;
+import com.nice.domain.User;
+import com.nice.repository.UserRepository;
+import com.nice.services.impl.UserServiceImpl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -69,5 +71,10 @@ public class UserServiceTest {
 		Mockito.when(userRepository.findByUserName(testUserName)).thenReturn(testUser);
 		userRepository.delete(testUser);
 		Mockito.verify(userRepository,Mockito.times(1)).delete(testUser);
+	}
+	@Test(expected = NotFoundException.class)
+	public void shouldThrowException(){
+		Mockito.when(userRepository.findOne(1L)).thenReturn(null);
+		userServiceImpl.updateUser(1L, " ");
 	}
 }

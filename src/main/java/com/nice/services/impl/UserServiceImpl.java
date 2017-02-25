@@ -11,8 +11,6 @@ import com.nice.repository.UserRepository;
 import com.nice.services.UserService;
 
 
-
-
 /**
  * Created by deepesh nellutla on 2/23/2017.
  * Implementor of the User Service.
@@ -35,17 +33,14 @@ public class UserServiceImpl implements UserService {
     public User findByIdOrUserName(String idOrUserName) {
         User user;
 
-        try {
-            Long id = new Long(idOrUserName);
-            user = userRepository.findOne(id);
-        } catch (Exception e) {
-            user = null;
-        }
-
+        Long id = new Long(idOrUserName);
+        user = userRepository.findOne(id);
         if (user == null) {
             user = userRepository.findByUserName(idOrUserName);
         }
-
+        if(user==null){
+            throw new NotFoundException("name with given idorUserName not found");
+        }
         return user;
     }
 
@@ -57,16 +52,15 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     public User updateUser(Long id, String userName) {
-        try {
-            User user = userRepository.findOne(id);
-            if (user == null) {
-                throw new NotFoundException("task with given id not found");
-            }
-            user.setUserName(userName);
-            return userRepository.save(user);
-        } catch (Exception e) {
-            return null;
+
+        User user = userRepository.findOne(id);
+        if (user == null) {
+            throw new NotFoundException("name with given id not found");
         }
+        user.setUserName(userName);
+        return userRepository.save(user);
+
+
     }
 
     @Transactional
