@@ -1,28 +1,28 @@
 package com.nice;
 
-import com.nice.data.Status;
-import com.nice.domain.Tasks;
-import com.nice.domain.User;
-import com.nice.repository.TaskRepository;
-import com.nice.repository.UserRepository;
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import javax.transaction.Transactional;
-import java.util.HashSet;
-import java.util.Set;
+import com.nice.data.Status;
+import com.nice.domain.Tasks;
+import com.nice.domain.User;
+import com.nice.repository.TaskRepository;
+import com.nice.repository.UserRepository;
 
 /**
- * Created by Cigniti_1868 on 2/22/2017.
+ * Created by deepesh nellutla on 2/23/2017.
+ * Class to launch SpringBoot App.
  */
 @SpringBootApplication
-public class Application implements CommandLineRunner{
+public class Application implements CommandLineRunner {
+
     @Autowired
-    private TaskRepository taskRepository;
-    @Autowired
-    private UserRepository userRepository;
+    TaskRepository taskRepository;
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class);
     }
@@ -31,20 +31,11 @@ public class Application implements CommandLineRunner{
     @Transactional
     public void run(String... strings) throws Exception {
         Tasks tasks = new Tasks();
-        Set<Tasks> set = new HashSet<Tasks>();
-
-
         tasks.setDescription("description1");
         tasks.setName("name");
-        tasks.setStatus(Status.COMPLETE);
-       // tasks.setUser(user);
-        User user = new User("deepesh");
-
-        //userRepository.save(user);
+        tasks.setStatus(Status.NOT_STARTED);
+        User user = new User("test user");
         tasks.setUser(user);
-       // user.setTasks(tasks);
-       // set.add(tasks);
-        //user.setTasks(set);
         taskRepository.save(tasks);
 
     }

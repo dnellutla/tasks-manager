@@ -3,7 +3,8 @@ package com.nice.services;
 import com.nice.domain.User;
 
 /**
- * Created by Cigniti_1868 on 2/22/2017.
+ * Created by deepesh nellutla on 2/23/2017.
+ * Service Layer for User Operations
  */
 
 public interface UserService {
@@ -16,5 +17,6 @@ public interface UserService {
 
     User updateUser(Long id, String userName);
 
-    void deleteUser(String userName);
+    void deleteUser(Long id);
 }
+

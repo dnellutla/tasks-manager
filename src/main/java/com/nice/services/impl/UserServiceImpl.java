@@ -1,16 +1,21 @@
 package com.nice.services.impl;
 
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.nice.Exceptions.NotFoundException;
 import com.nice.domain.User;
 import com.nice.repository.UserRepository;
 import com.nice.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+
+
 
 /**
- * Created by Cigniti_1868 on 2/22/2017.
+ * Created by deepesh nellutla on 2/23/2017.
+ * Implementor of the User Service.
  */
 @Service
 public class UserServiceImpl implements UserService {
@@ -65,8 +70,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional
-    public void deleteUser(String userName) {
-        User user = userRepository.findByUserName(userName);
+    public void deleteUser(Long id) {
+        User user = userRepository.findOne(id);
         if (user == null) {
             throw new NotFoundException("user with given userName not found");
         }

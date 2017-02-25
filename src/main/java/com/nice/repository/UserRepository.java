@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import javax.transaction.Transactional;
 
 /**
- * Created by Cigniti_1868 on 2/22/2017.
+ * Created by deepesh nellutla on 2/23/2017.
  */
 @Transactional
 public interface UserRepository extends CrudRepository<User, Long> {

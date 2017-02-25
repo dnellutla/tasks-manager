@@ -1,15 +1,48 @@
 package com.nice.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Column;
+import javax.persistence.Enumerated;
+import javax.persistence.GenerationType;
+import javax.persistence.EnumType;
+import javax.persistence.ManyToOne;
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+
 import com.nice.data.Status;
 
-import javax.persistence.*;
 
 /**
- * Created by Cigniti_1868 on 2/22/2017.
+ * Created by deepesh nellutla on 2/23/2017.
+ * This class denotes tasks table.
  */
 @Entity
 @Table(name = "tasks")
 public class Tasks {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @Column
+    private String name;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_task_id")
+    User user;
+
+    @Column
+    String description;
+
+
     public long getId() {
         return id;
     }
@@ -17,10 +50,6 @@ public class Tasks {
     public void setId(long id) {
         this.id = id;
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
 
     public String getName() {
         return name;
@@ -38,17 +67,15 @@ public class Tasks {
         this.status = status;
     }
 
-    //@ManyToOne
-    //@JoinColumn(name="user_task_id")
+
     public User getUser() {
-          return user;
+        return user;
     }
 
     public void setUser(User user) {
         this.user = user;
     }
 
-    String name;
 
     public String getDescription() {
         return description;
@@ -58,14 +85,6 @@ public class Tasks {
         this.description = description;
     }
 
-    String description;
-
-    @Enumerated(EnumType.STRING)
-    Status status;
-
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_task_id")
-    User user;
 
 }
 
