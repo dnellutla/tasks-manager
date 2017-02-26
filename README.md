@@ -11,5 +11,5 @@ Various end points are available for each operation.
 Technology Stack:
 
 SpringBoot 1.5.0.RELEASE
-H2 embedded database
+
 Mockito for Unit Tests
