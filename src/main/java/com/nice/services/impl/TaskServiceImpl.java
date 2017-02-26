@@ -27,30 +27,24 @@ public class TaskServiceImpl implements TaskService {
     UserRepository userRepository;
 
     @Autowired
-    TaskServiceImpl(TaskRepository taskRepository, UserRepository userRepository) {
+    public TaskServiceImpl(TaskRepository taskRepository, UserRepository userRepository) {
         this.taskRepository = taskRepository;
         this.userRepository = userRepository;
     }
 
-    @Override
+    @Transactional
     public Tasks createTask(CreateTaskRequest createTaskRequest) {
         Tasks tasks = new Tasks();
         tasks.setDescription(createTaskRequest.getDescription());
         tasks.setName(createTaskRequest.getName());
         tasks.setStatus(createTaskRequest.getStatus());
-        //User user = createTaskRequest.getUser();
         User user = userRepository.findByUserName(createTaskRequest.getUser().getUserName());
         if (user != null) {
             tasks.setUser(user);
-
-
         } else {
             tasks.setUser(createTaskRequest.getUser());
         }
-        taskRepository.save(tasks);
-
-
-        return tasks;
+        return taskRepository.save(tasks);
     }
 
     @Transactional

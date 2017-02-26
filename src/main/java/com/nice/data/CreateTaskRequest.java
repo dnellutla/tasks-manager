@@ -7,7 +7,21 @@ import com.nice.domain.User;
 
 
 public class CreateTaskRequest {
+
     String name;
+
+    String description;
+
+    Status status;
+
+    User user;
+
+    public CreateTaskRequest(String name, String description, Status status,User user){
+        this.name = name;
+        this.description = description;
+        this.status = status;
+        this.user = user;
+    }
 
     public String getName() {
         return name;
@@ -41,10 +55,6 @@ public class CreateTaskRequest {
         this.user = user;
     }
 
-    String description;
 
-    Status status;
-
-    User user;
 
 }
