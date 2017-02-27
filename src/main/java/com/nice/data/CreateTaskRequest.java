@@ -16,6 +16,15 @@ public class CreateTaskRequest {
 
     User user;
 
+   protected CreateTaskRequest(){}
+
+   public CreateTaskRequest(String name,String description,Status status,User user){
+        this.name=name;
+        this.description=description;
+        this.status=status;
+        this.user=user;
+    }
+
     public String getName() {
         return name;
     }
