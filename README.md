@@ -10,6 +10,6 @@ Various end points are available for each operation.
 
 Technology Stack:
 
-SpringBoot 1.5.0.RELEASE
+Java 8, SpringBoot 1.5.0.RELEASE
 
 Mockito for Unit Tests
